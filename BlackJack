@@ -1,0 +1,74 @@
+from random import random, choice
+from os import system
+def calculate_score(cards):
+    if len(cards) == 2 and sum(cards) == 21:
+        return 0
+    if sum(cards) > 21 and 11 in cards:
+        cards.remove(11)
+        cards.append(1)
+    return sum(cards)
+
+
+def compare():
+    user_score = calculate_score(user_cards)
+    computer_score = calculate_score(computer_cards)
+    if user_score == computer_score:
+        print("DRAW")
+        exit()
+
+def deal_card():
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    return choice(cards)
+
+
+user_cards = []
+computer_cards = []
+
+want_to_play = input("Do you want to play the game of blackjack again. Type 'y' or 'n':")
+
+while want_to_play == 'y':
+    user_cards = []
+    computer_cards = []
+    system('clear')
+    user_cards.append(deal_card())
+    user_cards.append(deal_card())
+    computer_cards.append(deal_card())
+    is_game_over = False
+
+    player_score = calculate_score(user_cards)
+    computer_score = calculate_score(computer_cards)
+    print(f"Your Cards: {user_cards}, current_score: {player_score}")
+    print(f"Computer's first card: {computer_cards}")
+
+    if player_score == 0 or computer_score == 0 or player_score > 21:
+        is_game_over = True
+    else:
+        another_chance = input("Type 'y' to get another chance or 'n' to pass:")
+        while another_chance == 'y' and is_game_over == False:
+            user_cards.append(deal_card())
+            player_score = sum(user_cards)
+            print(f"Your Cards: {user_cards}, current_score: {player_score}")
+            print(f"Computer's first card: {computer_cards}")
+
+            if player_score > 21:
+               is_game_over = True
+            else:
+                another_chance = input("Type 'y' to get another chance or 'n' to pass:")
+        if another_chance == 'n':
+
+    if is_game_over == True:
+        print(f"Your final hand: {user_cards}, final_score: {player_score}")
+        print(f"Computer's final hand: {user_cards}, final_score: {player_score}")
+        print("You went over. You Lose.")
+        want_to_play = input("Do you want to play the game of blackjack again. Type 'y' or 'n':")
+
+
+
+if want_to_play == 'n':
+    exit()
+
+
+
+
+
+
