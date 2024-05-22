@@ -1,0 +1,37 @@
+from random import random, randint
+attempts = {
+    "easy": 10,
+    "hard": 5
+}
+
+
+print("Welcome to the Number Guessing Game!")
+print("I'm thinking of a number between 1 and 100.")
+
+correct_no = randint(1, 101)
+guessed_no = 0
+
+def check_number(guessed_no):
+    if guessed_no == correct_no:
+        print(f"You got it. The answer was {correct_no}.")
+        exit()
+    elif guessed_no > correct_no:
+        print("Too High.\nGuess Again.")
+    else:
+        print("Too Low.\nGuess Again.")
+
+
+print(correct_no)
+difficulty_level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+no_of_attempts = attempts[difficulty_level]
+
+while no_of_attempts > 0:
+    print(f"You have {no_of_attempts} attempts remaining to guess the number")
+    guessed_no = int(input("Make a guess: "))
+    check_number(guessed_no)
+    no_of_attempts -= 1
+
+
+if no_of_attempts == 0 and guessed_no != correct_no:
+    print("You have run out of guesses. You Lose")
+
